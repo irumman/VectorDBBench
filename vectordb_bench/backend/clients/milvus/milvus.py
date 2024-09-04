@@ -47,8 +47,8 @@ class Milvus(VectorDB):
 
         if not utility.has_collection(self.collection_name):
             fields = [
-                FieldSchema(self._primary_field, DataType.INT64, is_primary=True, is_partition_key=True),
-                FieldSchema(self._scalar_field, DataType.INT64),
+                FieldSchema(self._primary_field, DataType.INT64, is_primary=True),
+                FieldSchema(self._scalar_field, DataType.INT64, is_partition_key=True),
                 FieldSchema(self._vector_field, DataType.FLOAT_VECTOR, dim=dim)
             ]
 
@@ -59,7 +59,7 @@ class Milvus(VectorDB):
                 name=self.collection_name,
                 schema=CollectionSchema(fields),
                 consistency_level="Session",
-                partition_key_field="pk",
+                partition_key_field="id",
                 num_partitions=16
                 # num_shards=10
 
