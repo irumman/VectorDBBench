@@ -19,9 +19,9 @@ class MilvusConfig(DBConfig):
                 "user": self.user,
                 "password": self.password.get_secret_value(),
                 "db_name": self.db_name,
-                "client_key_path": self.cert_file,
-                "client_pem_path": self.key_file,
-                "ca_pem_path": self.ca_file,
+                "client_key_path": self.client_key_path,
+                "client_pem_path": self.client_pem_path,
+                "ca_pem_path": self.ca_pem_path,
                 "server_name": self.uri,
                 "keep_alive": self.keep_alive
                 }
