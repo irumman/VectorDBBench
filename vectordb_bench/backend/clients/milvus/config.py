@@ -9,9 +9,9 @@ class MilvusConfig(DBConfig):
     db_name: str = "db-name"
     user: str = "user"
     password: SecretStr = "password"
-    client_pem_path: str = "certs/kaizen-data/sandbox/public.pem"
-    client_key_path: str = "certs/kaizen-data/sandbox/private.key"
-    ca_pem_path: str = "certs/kaizen-data/sandbox/ca.pem"
+    client_pem_path: str = "certs/public.pem"
+    client_key_path: str = "certs/private.key"
+    ca_pem_path: str = "certs/ca.pem"
     keep_alive: bool = True
 
     def to_dict(self) -> dict:
