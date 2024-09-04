@@ -3,10 +3,28 @@ from ..api import DBConfig, DBCaseConfig, MetricType, IndexType
 
 
 class MilvusConfig(DBConfig):
-    uri: SecretStr = "http://localhost:19530"
+
+    uri: str = "host"
+    port: int = "19530"
+    db_name: str = "db-name"
+    user: str = "user"
+    password: SecretStr = "password"
+    client_pem_path: str = "certs/kaizen-data/sandbox/public.pem"
+    client_key_path: str = "certs/kaizen-data/sandbox/private.key"
+    ca_pem_path: str = "certs/kaizen-data/sandbox/ca.pem"
+    keep_alive: bool = True
 
     def to_dict(self) -> dict:
-        return {"uri": self.uri.get_secret_value()}
+        return {"uri": f"https://{self.uri}:{self.port}",
+                "user": self.user,
+                "password": self.password.get_secret_value(),
+                "db_name": self.db_name,
+                "client_key_path": self.cert_file,
+                "client_pem_path": self.key_file,
+                "ca_pem_path": self.ca_file,
+                "server_name": self.uri,
+                "keep_alive": self.keep_alive
+                }
 
 
 class MilvusIndexConfig(BaseModel):

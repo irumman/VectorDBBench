@@ -135,7 +135,9 @@ class AwsS3Reader(DatasetReader):
         log.info(f"Start to downloading files, total count: {len(downloads)}")
         for s3_file in tqdm(downloads):
             log.debug(f"downloading file {s3_file} to {local_ds_root}")
-            self.fs.download(s3_file, local_ds_root.as_posix())
+            self.fs.download(s3_file, local_ds_root.as_posix(),
+                             block_size=10_000_000,  # 10 MB block size, adjust as needed
+                             max_workers=10)
 
         log.info(f"Succeed to download all files, downloaded file count = {len(downloads)}")
 

@@ -58,7 +58,9 @@ class Milvus(VectorDB):
             col = Collection(
                 name=self.collection_name,
                 schema=CollectionSchema(fields),
-                consistency_level="Session",
+                consistency_level="Session"
+                # num_shards=10
+
             )
 
             col.create_index(
