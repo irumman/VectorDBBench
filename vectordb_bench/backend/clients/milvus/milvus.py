@@ -60,7 +60,7 @@ class Milvus(VectorDB):
                 schema=CollectionSchema(fields),
                 consistency_level="Session",
                 partition_key_field="id",
-                num_partitions=16
+                num_partitions=3
                 # num_shards=10
 
             )
