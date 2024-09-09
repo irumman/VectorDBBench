@@ -59,10 +59,9 @@ class Milvus(VectorDB):
                 name=self.collection_name,
                 schema=CollectionSchema(fields),
                 consistency_level="Session",
-                partition_key_field="id",
+#                partition_key_field="id",
                 #num_partitions=3
-                num_shards=10
-
+                num_shards=3
             )
 
             col.create_index(
@@ -96,7 +95,7 @@ class Milvus(VectorDB):
         self._post_insert()
         log.info(f"{self.name} optimizing before search")
         try:
-            self.col.load()
+            self.col.load(replica_number=3)
         except Exception as e:
             log.warning(f"{self.name} optimize error: {e}")
             raise e from None
