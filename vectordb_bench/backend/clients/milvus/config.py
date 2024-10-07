@@ -13,6 +13,8 @@ class MilvusConfig(DBConfig):
     client_key_path: str = "certs/private.key"
     ca_pem_path: str = "certs/ca.pem"
     keep_alive: bool = True
+    num_shards: int = 1
+    num_replica: int = 1
 
     def to_dict(self) -> dict:
         return {"uri": f"https://{self.uri}:{self.port}",
@@ -23,7 +25,9 @@ class MilvusConfig(DBConfig):
                 "client_pem_path": self.client_pem_path,
                 "ca_pem_path": self.ca_pem_path,
                 "server_name": self.uri,
-                "keep_alive": self.keep_alive
+                "keep_alive": self.keep_alive,
+                "num_shards": self.num_shards,
+                "num_replica": self.num_replica
                 }
 
 
